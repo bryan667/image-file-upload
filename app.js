@@ -1,3 +1,4 @@
+const fs = require('fs')
 const express = require('express')
 const app = express()
 const fileUpload = require('express-fileupload')
@@ -20,13 +21,18 @@ app.get('/upload', (req, res) => {
 
 app.post('/upload', (req, res) => {
 
-    console.log('type:', req.files.inputFile)
+  let dir = __dirname + '/uploads/'
+
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+        console.log('Directory created')
+    }
 
     if (req.files.inputFile) {
           let file = req.files.inputFile,
               name = file.name,
               type = file.mimetype
-          let uploadpath = __dirname + '/uploads/' + name
+          let uploadpath = dir + name
           var imageTest = (/^image/i).test(type)      
       // console.log('Regex:', imageTest, type)
 
