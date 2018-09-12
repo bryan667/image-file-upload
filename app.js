@@ -47,6 +47,6 @@ app.post('/upload', (req, res) => {
     }
 
     else {
-      res.render(htmlPath + '/no-upload.html')
+      res.sendFile(htmlPath + '/no-upload.html')
     }
 })
