@@ -4,6 +4,7 @@ const app = express()
 const fileUpload = require('express-fileupload')
 const htmlPath = (__dirname+'/html')
 const port = 3000
+const uploadDir = (__dirname + '/uploads/')
 
 app.use(fileUpload()) //middleware
 
@@ -21,10 +22,8 @@ app.get('/upload', (req, res) => {
 
 app.post('/upload', (req, res) => {
 
-  let dir = __dirname + '/uploads/'
-
-    if (!fs.existsSync(dir)){
-        fs.mkdirSync(dir);
+    if (!fs.existsSync(uploadDir)){
+        fs.mkdirSync(uploadDir);
         console.log('Directory created')
     }
 
@@ -32,7 +31,7 @@ app.post('/upload', (req, res) => {
           let file = req.files.inputFile,
               name = file.name,
               type = file.mimetype
-          let uploadpath = dir + name
+          let uploadpath = uploadDir + name
           var imageTest = (/^image/i).test(type)      
       // console.log('Regex:', imageTest, type)
 
