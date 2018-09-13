@@ -20,15 +20,15 @@ var multer = require('multer')
   })
 
   var upload = multer({
-        storage: storage,  //calls multer.diskStorage
-        fileFilter: function (req, file, cb) {
-            let imageTest = (/^image/i).test(file.mimetype)
-                if (imageTest !== true) {
-                    req.Error = 'File is not an image file' 
-                    return cb(null, false)
-                }
-              cb(null, true)
-        }
+      storage: storage,  //calls multer.diskStorage
+      fileFilter: function (req, file, cb) {
+          let imageTest = (/^image/i).test(file.mimetype)
+              if (imageTest !== true) {
+                  req.Error = 'File is not an image file' 
+                  return cb(null, false)
+              }
+            cb(null, true)
+      }
   }).single('inputFile')
 
 
@@ -66,7 +66,7 @@ app.post('/upload', (req, res) => {
                   res.sendFile(htmlPath + '/upload.html')
                 }
 
-            })
+        })
 })
 
 
